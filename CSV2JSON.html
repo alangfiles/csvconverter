@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSV 2 JSON bro!!</title>
+    <style media="screen">
+      textarea{
+        height:150px;
+        width: 570px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="csv-input">Year,Make,Model,Description,Price
+1997,Ford,E350,"ac, abs, moon",3000.00
+1999,Chevy,"Venture ""Extended Edition""","",4900.00
+1999,Chevy,"Venture ""Extended Edition, Very Large""",,5000.00
+1996,Jeep,Grand Cherokee,"MUST SELL!
+air, moon roof, loaded",4799.00
+    </textarea>
+    <input type="button" name="convert" value="Convert!" onclick="CSV2JSON();" id="convert-button">
+    <br>
+    <p id="json-output">
+      Output will go here!
+    </p>
+    <script src="CSVtoJSON.js"></script>
+  </body>
+</html>
