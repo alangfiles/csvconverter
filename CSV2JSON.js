@@ -10,11 +10,11 @@ function CSV2JSON(){
   rowSeparator = '\n';
   headerExists = true;
   //split on the newline, this is incorrect, it should find newlines not in quotes
-  rowStrings = splitFileOnRows(rowSeparator);
+  rowStrings = splitBasedOnSeparator(input, rowSeparator, true); //include quotes
 
   //set up the header
   if(headerExists == true){
-      headerRow = rowStrings[0].split(separator);
+      headerRow = splitBasedOnSeparator(rowStrings[0],separator);
       rowStrings = rowStrings.slice(1); //the rest of the rows minus the header.
   }
   else{
@@ -27,7 +27,7 @@ function CSV2JSON(){
   //now let's make some json objects.
   for(var rowIndex in rowStrings){
     var rowObject = {};
-    var row = splitRowString(rowStrings[rowIndex], separator);
+    var row = splitBasedOnSeparator(rowStrings[rowIndex], separator, false); //don't include quotes
 
     for(var i in row){
       var column = row[i];
@@ -35,17 +35,15 @@ function CSV2JSON(){
     }
     output.push(rowObject);
   }
+
+  var jsonOutput = document.querySelector("#json-output");
+
+  jsonOutput.innerHTML = JSON.stringify(output);
+
 }
 
-function splitFileOnRows(fileInput, rowSeparator){
-  var outputFile = [];
 
-  return outputFile;
-}
-
-
-
-function splitRowString(rowInput, separator){
+function splitBasedOnSeparator(rowInput, separator, includeQuotes){
   //splits based on inner quotes
   var outputRow = [];
   var charRow = rowInput.split('');
@@ -60,6 +58,10 @@ function splitRowString(rowInput, separator){
     }
     else if (charRow[i] == '"'){
       inBetweenQuotes = !inBetweenQuotes;
+      if(includeQuotes){
+        word += charRow[i];
+      }
+
     }
     else{
         word += charRow[i];
