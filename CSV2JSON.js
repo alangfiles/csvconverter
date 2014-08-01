@@ -38,7 +38,7 @@ function CSV2JSON(){
 
   var jsonOutput = document.querySelector("#json-output");
 
-  jsonOutput.innerHTML = JSON.stringify(output);
+  jsonOutput.innerHTML = JSON.stringify(output, undefined, 2); //extra params for pretty-print
 
 }
 
