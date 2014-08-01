@@ -67,5 +67,6 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
         word += charRow[i];
     }
   }
+  outputRow.push(word); //add that last word.
   return outputRow;
 }
