@@ -4,7 +4,7 @@
 var input, separator, rowSeparator, rowStrings, headerRow, headerExists, output;
 function CSV2JSON(){
 
-  input = document.querySelector("#csv-input").innerHTML;
+  input = document.querySelector("#csv-input").value;
   output = [];
   separator = ',';
   rowSeparator = '\n';
