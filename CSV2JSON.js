@@ -53,6 +53,7 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
   for(var i in charRow){
 
     if(charRow[i] == separator && inBetweenQuotes == false){
+      (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
       outputRow.push(word);
       word = '';
     }
@@ -67,6 +68,9 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
         word += charRow[i];
     }
   }
+  (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
   outputRow.push(word); //add that last word.
   return outputRow;
 }
+
+function isNumber(obj) { return !isNaN(parseFloat(obj)) }
