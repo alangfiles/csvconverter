@@ -10,7 +10,7 @@ function CSV2JSON(){
   rowSeparator = '\n';
   headerExists = true;
   //split on the newline, this is incorrect, it should find newlines not in quotes
-  rowStrings = splitBasedOnSeparator(input, rowSeparator, true); //include quotes
+  rowStrings = splitBasedOnSeparator(input, rowSeparator, false); //include quotes
 
   //set up the header
   if(headerExists == true){
@@ -27,7 +27,7 @@ function CSV2JSON(){
   //now let's make some json objects.
   for(var rowIndex in rowStrings){
     var rowObject = {};
-    var row = splitBasedOnSeparator(rowStrings[rowIndex], separator, false); //don't include quotes
+    var row = splitBasedOnSeparator(rowStrings[rowIndex], separator, true); //don't include quotes
 
     for(var i in row){
       var column = row[i];
@@ -53,7 +53,9 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
   for(var i in charRow){
 
     if(charRow[i] == separator && inBetweenQuotes == false){
-      (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
+      if(includeQuotes == true){
+        (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
+      }
       outputRow.push(word);
       word = '';
     }
@@ -68,7 +70,9 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
         word += charRow[i];
     }
   }
-  (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
+  if(includeQuotes == true){
+    (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
+  }
   outputRow.push(word); //add that last word.
   return outputRow;
 }
