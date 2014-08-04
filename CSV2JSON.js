@@ -30,10 +30,10 @@ function CSV2JSON(){
     var row = splitBasedOnSeparator(rowStrings[rowIndex], separator, false); //don't include quotes
 
     for(var i in row){
-      var column = row[i];
+      var column = (isNumber(row[i]) ? parseFloat(row[i]) : row[i]);
       rowObject[headerRow[i]] = column;
     }
-    (isNumber(rowObject) ? output.push(parseFloat(rowObject)) : output.push(rowObject));
+    output.push(rowObject);
   }
 
   var jsonOutput = document.querySelector("#json-output");
