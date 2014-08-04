@@ -55,8 +55,9 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
     if(charRow[i] == separator && inBetweenQuotes == false){
       if(includeQuotes == true){
         (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
-      }
+      }else{
       outputRow.push(word);
+      }
       word = '';
     }
     else if (charRow[i] == '"'){
@@ -70,10 +71,12 @@ function splitBasedOnSeparator(rowInput, separator, includeQuotes){
         word += charRow[i];
     }
   }
+  //add that last word.
   if(includeQuotes == true){
     (isNumber(word) ? outputRow.push(parseFloat(word)) : outputRow.push(word));
-  }
-  outputRow.push(word); //add that last word.
+  }else{
+    outputRow.push(word);
+  } 
   return outputRow;
 }
 
