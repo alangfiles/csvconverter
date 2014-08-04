@@ -33,7 +33,7 @@ function CSV2JSON(){
       var column = row[i];
       rowObject[headerRow[i]] = column;
     }
-    output.push(rowObject);
+    (isNumber(rowObject) ? output.push(parseFloat(rowObject)) : output.push(rowObject));
   }
 
   var jsonOutput = document.querySelector("#json-output");
